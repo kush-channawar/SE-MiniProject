@@ -1,0 +1,3 @@
+# SE-MiniProject
+
+SMART ATTENDANCE SYSTEM
