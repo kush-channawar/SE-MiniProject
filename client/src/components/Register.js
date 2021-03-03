@@ -6,10 +6,12 @@ const Register = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
-    name: ""
+    name: "",
+    address:"",
+    age:"",
   });
 
-  const { email, password, name } = inputs;
+  const { email, password, name,address,age } = inputs;
 
   const onChange = e =>
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -17,7 +19,7 @@ const Register = ({ setAuth }) => {
   const onSubmitForm = async e => {
     e.preventDefault();
     try {
-      const body = { email, password, name };
+      const body = { email, password, name ,address,age};
       const response = await fetch(
         "http://localhost:5000/auth/register",
         {
@@ -68,6 +70,22 @@ const Register = ({ setAuth }) => {
           name="name"
           value={name}
           placeholder="name"
+          onChange={e => onChange(e)}
+          className="form-control my-3"
+        />
+        <input
+          type="text"
+          name="address"
+          value={address}
+          placeholder="address"
+          onChange={e => onChange(e)}
+          className="form-control my-3"
+        />
+        <input
+          type="integer"
+          name="age"
+          value={age}
+          placeholder="age"
           onChange={e => onChange(e)}
           className="form-control my-3"
         />
