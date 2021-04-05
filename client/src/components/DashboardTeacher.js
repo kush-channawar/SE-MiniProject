@@ -6,7 +6,7 @@ const Dashboard = ({ setAuth }) => {
 
   const getProfile = async () => {
     try {
-      const res = await fetch("http://localhost:5000/dashboard/", {
+      const res = await fetch("http://localhost:5000/dashboardteacher/", {
         method: "POST",
         headers: { jwt_token: localStorage.token }
       });
@@ -35,7 +35,7 @@ const Dashboard = ({ setAuth }) => {
 
   return (
     <div>
-      <h1 className="mt-5">Dashboard</h1>
+      <h1 className="mt-5">Dashboard Teacher</h1>
       <h2>Welcome {name}</h2>
       <button onClick={e => logout(e)} className="btn btn-primary">
         Logout

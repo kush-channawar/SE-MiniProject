@@ -12,9 +12,13 @@ import { toast } from "react-toastify";
 
 //components
 
-import Login from "./components/Login";
+import LoginStudent from "./components/LoginStudent";
+import LoginTeacher from "./components/LoginTeacher";
+import LoginAdmin from "./components/LoginAdmin";
 import Register from "./components/Register";
-import Dashboard from "./components/Dashboard";
+import DashboardStudent from "./components/DashboardStudent";
+import DashboardTeacher from "./components/DashboardTeacher";
+import DashboardAdmin from "./components/DashboardAdmin";
 
 toast.configure();
 
@@ -49,25 +53,36 @@ function App() {
       <Router>
         <div className="container">
           <Switch>
-          <Route
+            <Route
               exact
-              path="/"
+              path="/loginstudent"
               render={props =>
                 !isAuthenticated ? (
-                  <Login {...props} setAuth={setAuth} />
+                  <LoginStudent {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/dashboard" />
+                  <Redirect to="/dashboardstudent" />
                 )
               }
             />
             <Route
               exact
-              path="/login"
+              path="/loginteacher"
               render={props =>
                 !isAuthenticated ? (
-                  <Login {...props} setAuth={setAuth} />
+                  <LoginTeacher {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/dashboard" />
+                  <Redirect to="/dashboardteacher" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/loginadministrator"
+              render={props =>
+                !isAuthenticated ? (
+                  <LoginAdmin {...props} setAuth={setAuth} />
+                ) : (
+                  <Redirect to="/dashboardadmin" />
                 )
               }
             />
@@ -78,18 +93,40 @@ function App() {
                 !isAuthenticated ? (
                   <Register {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/dashboard" />
+                  <Redirect to="/dashboardadmin" />
                 )
               }
             />
             <Route
               exact
-              path="/dashboard"
+              path="/dashboardstudent"
               render={props =>
                 isAuthenticated ? (
-                  <Dashboard {...props} setAuth={setAuth} />
+                  <DashboardStudent {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/login" />
+                  <Redirect to="/loginstudent" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/dashboardteacher"
+              render={props =>
+                isAuthenticated ? (
+                  <DashboardTeacher {...props} setAuth={setAuth} />
+                ) : (
+                  <Redirect to="/loginteacher" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/dashboardadmin"
+              render={props =>
+                isAuthenticated ? (
+                  <DashboardAdmin {...props} setAuth={setAuth} />
+                ) : (
+                  <Redirect to="/loginadministrator" />
                 )
               }
             />

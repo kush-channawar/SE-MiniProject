@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+
 
 import { toast } from "react-toastify";
 
@@ -19,7 +19,7 @@ const Login = ({ setAuth }) => {
     try {
       const body = { email, password };
       const response = await fetch(
-        "http://localhost:5000/auth/login",
+        "http://localhost:5000/auth/loginteacher",
         {
           method: "POST",
           headers: {
@@ -46,7 +46,7 @@ const Login = ({ setAuth }) => {
 
   return (
     <Fragment>
-      <h1 className="mt-5 text-center">Login</h1>
+      <h1 className="mt-5 text-center">Login Teacher</h1>
       <form onSubmit={onSubmitForm}>
         <input
           type="text"
@@ -66,7 +66,6 @@ const Login = ({ setAuth }) => {
         />
         <button class="btn btn-success btn-block">Submit</button>
       </form>
-      <Link to="/register">register</Link>
     </Fragment>
   );
 };
