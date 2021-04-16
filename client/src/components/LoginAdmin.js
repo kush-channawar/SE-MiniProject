@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
-
+import Header from "../Header"
 import { toast } from "react-toastify";
 
 const Login = ({ setAuth }) => {
@@ -46,7 +45,8 @@ const Login = ({ setAuth }) => {
 
   return (
     <Fragment>
-      <h1 className="mt-5 text-center">Login</h1>
+      <Header/>
+      <h1 className="mt-5 text-center">Login Admin</h1>
       <form onSubmit={onSubmitForm}>
         <input
           type="text"
@@ -65,8 +65,13 @@ const Login = ({ setAuth }) => {
           className="form-control my-3"
         />
         <button class="btn btn-success btn-block">Submit</button>
-      </form>
-      <Link to="/register">register</Link>
+      </form >
+      <form action="/register">
+        
+      <button class= "btn btn-warning btn-block"> Register</button></form>
+      <br>
+      </br>
+  
     </Fragment>
   );
 };

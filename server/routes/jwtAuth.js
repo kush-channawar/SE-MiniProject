@@ -6,7 +6,6 @@ const validInfo = require("../middleware/validInfo");
 const jwtGenerator = require("../utils/jwtGenerator");
 const authorize = require("../middleware/authorize");
 
-//authorizeentication
 
 router.post("/register", validInfo, async (req, res) => {
   const { email, name, password} = req.body;
@@ -82,6 +81,22 @@ router.post("/loginteacher", validInfo, async (req, res) => {
     console.error(err.message);
     res.status(500).send("Server error");
   }
+});
+router.post('/dashboardadmin/upload', (req, res,next) => {
+  if (req.files === null) {
+    return res.status(400).json({ msg: 'No file uploaded' });
+  }
+
+  const file = req.files.file;
+
+  file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+
+    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+  });
 });
 
 router.post("/loginadministrator", validInfo, async (req, res) => {

@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-
+import Header from "../Header"
 
 import { toast } from "react-toastify";
 
@@ -46,6 +46,7 @@ const Login = ({ setAuth }) => {
 
   return (
     <Fragment>
+      <Header/>
       <h1 className="mt-5 text-center">Login Student</h1>
       <form onSubmit={onSubmitForm}>
         <input

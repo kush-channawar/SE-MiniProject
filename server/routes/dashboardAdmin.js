@@ -2,6 +2,8 @@ const router = require("express").Router();
 const authorize = require("../middleware/authorize");
 const pool = require("../db");
 
+
+
 router.post("/", authorize, async (req, res) => {
   try {
     const user = await pool.query(

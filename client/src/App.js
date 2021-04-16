@@ -16,6 +16,8 @@ import LoginStudent from "./components/LoginStudent";
 import LoginTeacher from "./components/LoginTeacher";
 import LoginAdmin from "./components/LoginAdmin";
 import Register from "./components/Register";
+import UploadStudent from "./components/UploadStudent"
+import UploadTeacher from "./components/UploadTeacher"
 import DashboardStudent from "./components/DashboardStudent";
 import DashboardTeacher from "./components/DashboardTeacher";
 import DashboardAdmin from "./components/DashboardAdmin";
@@ -127,6 +129,28 @@ function App() {
                   <DashboardAdmin {...props} setAuth={setAuth} />
                 ) : (
                   <Redirect to="/loginadministrator" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/uploadteacher"
+              render={props =>
+                isAuthenticated ? (
+                  <UploadTeacher  setAuth={setAuth} />
+                ) : (
+                  <UploadTeacher/>
+                )
+              }
+            />
+            <Route
+              exact
+              path="/uploadstudent"
+              render={props =>
+                isAuthenticated ? (
+                  <UploadStudent  setAuth={setAuth} />
+                ) : (
+                  <UploadStudent/>
                 )
               }
             />

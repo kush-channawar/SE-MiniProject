@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
 
@@ -34,13 +33,28 @@ const Dashboard = ({ setAuth }) => {
   }, []);
 
   return (
+    <Fragment>
+      
     <div>
       <h1 className="mt-5">Dashboard Admin</h1>
       <h2>Welcome {name}</h2>
       <button onClick={e => logout(e)} className="btn btn-primary">
         Logout
       </button>
+      <br/>
+      <br></br>
+      <form action="/uploadstudent">
+      <button className="btn btn-secondary"> Upload Student csv</button>
+      </form>
+      <br/>
+      <br></br>
+      <form action="/uploadteacher">
+      <button className="btn btn-success"> Upload Teacher csv</button>
+      </form>
+     
+    
     </div>
+    </Fragment>
   );
 };
 
