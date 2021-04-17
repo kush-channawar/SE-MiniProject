@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(express.static('public'));
-app.post('/uploadstudent', (req, res) => {
+app.post('/dashboardadmin/uploadstudent', (req, res) => {
     if (req.files === null) {
       return res.status(400).json({ msg: 'No file uploaded' });
     }
@@ -25,7 +25,7 @@ app.post('/uploadstudent', (req, res) => {
     });
   });
   
-  app.post('/uploadteacher', (req, res) => {
+  app.post('/dashboardadmin/uploadteacher',(req, res) => {
     if (req.files === null) {
       return res.status(400).json({ msg: 'No file uploaded' });
     }

@@ -1,17 +1,16 @@
 import React, { Fragment, useState } from "react";
-import { Link} from "react-router-dom";
+
 import { toast } from "react-toastify";
 
 const Register = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
+    id:"",
     email: "",
     password: "",
     name: "",
-    address:"",
-    age:"",
   });
 
-  const { email, password, name,address,age } = inputs;
+  const { id,email, password, name} = inputs;
 
   const onChange = e =>
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -19,7 +18,7 @@ const Register = ({ setAuth }) => {
   const onSubmitForm = async e => {
     e.preventDefault();
     try {
-      const body = { email, password, name ,address,age};
+      const body = {id, email, password, name };
       const response = await fetch(
         "http://localhost:5000/auth/register",
         {
@@ -49,6 +48,14 @@ const Register = ({ setAuth }) => {
     <Fragment>
       <h1 className="mt-5 text-center">Register</h1>
       <form onSubmit={onSubmitForm}>
+      <input
+          type="text"
+          name="id"
+          value={id}
+          placeholder="ID"
+          onChange={e => onChange(e)}
+          className="form-control my-3"
+        />
         <input
           type="text"
           name="email"
@@ -73,25 +80,13 @@ const Register = ({ setAuth }) => {
           onChange={e => onChange(e)}
           className="form-control my-3"
         />
-        <input
-          type="text"
-          name="address"
-          value={address}
-          placeholder="address"
-          onChange={e => onChange(e)}
-          className="form-control my-3"
-        />
-        <input
-          type="integer"
-          name="age"
-          value={age}
-          placeholder="age"
-          onChange={e => onChange(e)}
-          className="form-control my-3"
-        />
         <button className="btn btn-success btn-block">Submit</button>
       </form>
-      <Link to="/login">login</Link>
+      <form action="/loginadministrator">
+        
+        <button class= "btn btn-warning btn-block"> Login</button></form>
+        <br>
+        </br>
     </Fragment>
   );
 };

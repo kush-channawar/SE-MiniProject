@@ -99,6 +99,7 @@ function App() {
                 )
               }
             />
+           
             <Route
               exact
               path="/dashboardstudent"
@@ -134,7 +135,7 @@ function App() {
             />
             <Route
               exact
-              path="/uploadteacher"
+              path="/dashboardadmin/uploadteacher"
               render={props =>
                 isAuthenticated ? (
                   <UploadTeacher  setAuth={setAuth} />
@@ -145,7 +146,7 @@ function App() {
             />
             <Route
               exact
-              path="/uploadstudent"
+              path="/dashboardadmin/uploadstudent"
               render={props =>
                 isAuthenticated ? (
                   <UploadStudent  setAuth={setAuth} />

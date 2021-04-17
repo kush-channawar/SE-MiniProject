@@ -43,14 +43,16 @@ const Dashboard = ({ setAuth }) => {
       </button>
       <br/>
       <br></br>
-      <form action="/uploadstudent">
+      <form action="/dashboardadmin/uploadstudent">
       <button className="btn btn-secondary"> Upload Student csv</button>
       </form>
       <br/>
       <br></br>
-      <form action="/uploadteacher">
+      <form action="/dashboardadmin/uploadteacher">
       <button className="btn btn-success"> Upload Teacher csv</button>
       </form>
+      <br/>
+      <br></br>
      
     
     </div>

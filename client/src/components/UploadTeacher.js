@@ -22,7 +22,7 @@ const UploadTeacher = () => {
     formData.append('file', file);
 
     try {
-      const res = await axios.post('http://localhost:5000/uploadteacher', formData, {
+      const res = await axios.post('http://localhost:5000/dashboardadmin/uploadteacher', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -78,6 +78,8 @@ const UploadTeacher = () => {
           className='btn btn-primary btn-block mt-4'
         />
       </form>
+
+      <form action = "/dashboardadmin"><button className='btn btn-danger btn-block mt-4'> Go Back</button></form>
       {uploadedFile ? (
         <div className='row mt-5'>
           <div className='col-md-6 m-auto'>
