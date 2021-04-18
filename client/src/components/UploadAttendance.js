@@ -54,7 +54,7 @@ const UploadAttendance = () => {
 
   return (
     <Fragment>
-      <h1>Student Upload </h1>
+      <h1>Student Upload Attendance</h1>
       {message ? <Message msg={message} /> : null}
       <form onSubmit={onSubmit}>
         <div className='custom-file mb-4'>
