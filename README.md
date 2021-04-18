@@ -1,6 +1,7 @@
 # SE-MiniProject
 
 SMART ATTENDANCE SYSTEM
+
 STEPS : 
 1)create a local postgres DB with the tables provided in "database.sql"
 2)go to pg.db file and enter ur postgres credentials
