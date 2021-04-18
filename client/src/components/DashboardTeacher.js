@@ -40,6 +40,11 @@ const Dashboard = ({ setAuth }) => {
       <button onClick={e => logout(e)} className="btn btn-primary">
         Logout
       </button>
+      <br/>
+      <br></br>
+      <form action="/dashboardteacher/uploadstudent">
+      <button className="btn btn-secondary"> Upload Student csv</button>
+      </form>
     </div>
   );
 };

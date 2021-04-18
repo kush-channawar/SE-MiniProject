@@ -21,6 +21,8 @@ import UploadTeacher from "./components/UploadTeacher"
 import DashboardStudent from "./components/DashboardStudent";
 import DashboardTeacher from "./components/DashboardTeacher";
 import DashboardAdmin from "./components/DashboardAdmin";
+import Header from "../src/Header"
+import UploadAttendance from"./components/UploadAttendance";
 
 toast.configure();
 
@@ -55,6 +57,17 @@ function App() {
       <Router>
         <div className="container">
           <Switch>
+            <Route
+              exact
+              path="/"
+              render={props =>
+                !isAuthenticated ? (
+                  <Header {...props} setAuth={setAuth} />
+                ) : (
+                  <Header/>
+                )
+              }
+            />
             <Route
               exact
               path="/loginstudent"
@@ -152,6 +165,17 @@ function App() {
                   <UploadStudent  setAuth={setAuth} />
                 ) : (
                   <UploadStudent/>
+                )
+              }
+            />
+            <Route
+              exact
+              path="/dashboardteacher/uploadstudent"
+              render={props =>
+                isAuthenticated ? (
+                  <UploadAttendance  setAuth={setAuth} />
+                ) : (
+                  <UploadAttendance/>
                 )
               }
             />

@@ -4,7 +4,7 @@ import Message from './Message';
 import Progress from './Progress';
 import axios from 'axios';
 
-const UploadTeacher = () => {
+const UploadAttendance = () => {
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
   const [uploadedFile, setUploadedFile] = useState({});
@@ -22,7 +22,7 @@ const UploadTeacher = () => {
     formData.append('file', file);
 
     try {
-      const res = await axios.post('http://localhost:5000/dashboardadmin/uploadteacher', formData, {
+      const res = await axios.post('http://localhost:5000/dashboardteacher/uploadstudent', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -54,13 +54,12 @@ const UploadTeacher = () => {
 
   return (
     <Fragment>
-        <h1>Teacher Upload </h1>
+      <h1>Student Upload </h1>
       {message ? <Message msg={message} /> : null}
       <form onSubmit={onSubmit}>
         <div className='custom-file mb-4'>
           <input
-            type='file'
-            accept='.csv'
+            type='file' accept = ".csv"
             className='custom-file-input'
             id='customFile'
             onChange={onChange}
@@ -78,18 +77,16 @@ const UploadTeacher = () => {
           className='btn btn-primary btn-block mt-4'
         />
       </form>
-
-      <form action = "/dashboardadmin"><button className='btn btn-danger btn-block mt-4'> Go Back</button></form>
+      <form action = "/dashboardteacher"><button className='btn btn-danger btn-block mt-4'> Go Back</button></form>
       {uploadedFile ? (
         <div className='row mt-5'>
           <div className='col-md-6 m-auto'>
             <h3 className='text-center'>{uploadedFile.fileName}</h3>
           </div>
         </div>
-        
       ) : null}
     </Fragment>
   );
 };
 
-export default UploadTeacher;
+export default UploadAttendance;
