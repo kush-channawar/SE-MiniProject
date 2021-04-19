@@ -187,7 +187,43 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
   app.post('/dashboardteacher/attended',(req,res)=>{
     res.json(present)
     console.log(present)
+    present.length=0;
+    macs.length=0;
+    names.length=0;
+    console.log(present);
   })
+
+  app.post('/timetable',async(req,res)=>{
+    try{
+      const data = await pool.query("select * from timetable")
+      //console.log(data.rows);
+      var days = new Array();
+      var p1 = new Array();
+      var p2 = new Array();
+      var p3 = new Array();
+      var p4 = new Array();
+      var p5 = new Array();
+      var p6 = new Array();
+      var p7 = new Array();
+
+      for(let i=0;i<data.rows.length;i++){
+        days.push(data.rows[i].day)
+        p1.push(data.rows[i].p1)
+        p2.push(data.rows[i].p2)
+        p3.push(data.rows[i].p3)
+        p4.push(data.rows[i].p4)
+        p5.push(data.rows[i].p5)
+        p6.push(data.rows[i].p6)
+        p7.push(data.rows[i].p7)
+
+      }
+      console.log(days.toString())
+      res.json({day :days,p1:p1,p2:p2,p3:p3,p4:p4,p5:p5,p6:p6,p7:p7})
+    }
+    catch(err){
+        console.log(err);
+    }
+})
 app.use('/auth', require("./routes/jwtauth"));
 app.use('/dashboardstudent', require("./routes/dashboardstudent"));
 app.use('/dashboardteacher', require("./routes/dashboardteacher"));

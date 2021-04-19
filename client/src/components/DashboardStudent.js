@@ -40,6 +40,10 @@ const Dashboard = ({ setAuth }) => {
       <button onClick={e => logout(e)} className="btn btn-primary">
         Logout
       </button>
+
+      <form action="/timetable">
+      <button className="btn btn-success">View TimeTable</button>
+      </form>
     </div>
   );
 };

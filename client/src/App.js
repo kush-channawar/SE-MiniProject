@@ -23,7 +23,7 @@ import DashboardTeacher from "./components/DashboardTeacher";
 import DashboardAdmin from "./components/DashboardAdmin";
 import Header from "../src/Header"
 import UploadAttendance from"./components/UploadAttendance";
-
+import TimeTable from "./components/TimeTable"
 toast.configure();
 
 function App() {
@@ -56,7 +56,19 @@ function App() {
     <Fragment>
       <Router>
         <div className="container">
+          
           <Switch>
+          <Route
+              exact
+              path="/timetable"
+              render={props =>
+                !isAuthenticated ? (
+                  <TimeTable {...props} setAuth={setAuth} />
+                ) : (
+                  <TimeTable/>
+                )
+              }
+            />
             <Route
               exact
               path="/"
