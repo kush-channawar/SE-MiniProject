@@ -195,7 +195,17 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
 
   app.post('/timetable',async(req,res)=>{
     try{
-      const data = await pool.query("select * from timetable")
+      const data = await pool.query("SELECT * FROM\
+      timetable\
+ ORDER BY \
+      CASE\
+           WHEN Day = 'Day' THEN 1\
+           WHEN Day = 'Monday' THEN 2\
+           WHEN Day = 'Tuesday' THEN 3\
+           WHEN Day = 'Wednesday' THEN 4\
+           WHEN Day = 'Thursday' THEN 5\
+           WHEN Day = 'Friday' THEN 6\
+      END ASC")
       //console.log(data.rows);
       var days = new Array();
       var p1 = new Array();
@@ -234,20 +244,20 @@ app.post('/dashboardadmin/uploadtimetable',(req,res)=>{
 
   const file = req.files.file;
   let reqPath = path.join(__dirname, '../')
-  file.mv(`${reqPath}/client/public/uploads/student/${file.name}`, err => {
+   file.mv(`${reqPath}/client/public/uploads/student/${file.name}`, err => {
     if (err) {
       console.error(err);
       return res.status(500).send(err);
     }
 
     res.json({ fileName: file.name, filePath: `/uploads/student/${file.name}` });
+    counter = 0;
 
 
-
-    let csvStream = csv.parseFile(`${reqPath}/client/public/uploads/student/${file.name}`, { headers: ['a','b','c','d','e','f','g','h','i']})
+    let csvStream = csv.parseFile(`${reqPath}/client/public/uploads/student/${file.name}`, {skipLines:false, headers: ['a','b','c','d','e','f','g','h','i']})
   .on("data", function(record){
       csvStream.pause();
-
+      
       if(counter < 6)
       {
           let day = record.a;
@@ -259,12 +269,15 @@ app.post('/dashboardadmin/uploadtimetable',(req,res)=>{
           let p6 = record.g;
           let p7 = record.h;
           let p8 = record.i;
-           pool.query("INSERT INTO timetable(day, p1,p2,p3,p4,p5,p6,p7,p8) VALUES($1, $2, $3, $4,$5,$6,$7,$8,$9)", [day,p1,p2,p3,p4,p5,p6,p7,p8], function(err){
+         
+             pool.query("INSERT INTO timetable(day, p1,p2,p3,p4,p5,p6,p7,p8) VALUES($1, $2, $3, $4,$5,$6,$7,$8,$9)", [day,p1,p2,p3,p4,p5,p6,p7,p8], function(err){
               if(err)
               {
                   console.log(err);
               }
           });
+          
+           
 
           ++counter;
       }
