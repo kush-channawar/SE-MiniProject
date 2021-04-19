@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(express.static('public'));
 var macs = new Array();
 var names=new Array();
+var present=new Array();
 pool.connect(function(err){
   if(err)
   {
@@ -145,7 +146,7 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
         return res.status(500).send(err);
       }
   
-      res.json({ fileName: file.name, filePath: `/uploads/student/${file.name}` });
+      res.json({ fileName: file.name, filePath: `/uploads/student/${file.name}`});
 
 
       
@@ -162,6 +163,7 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
           for(let i=0;i<macs.length;i++){
             if(macs[i]==mac){
               console.log(names[i], "is present")
+              present.push(names[i])
             }
           }
           
@@ -171,6 +173,7 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
         csvStream.resume();
 
     }).on("end", function(){
+    
         console.log("Job is done!");
     }).on("error", function(err){
         console.log(err);
@@ -181,12 +184,14 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
   }
   });
   
+  app.post('/dashboardteacher/attended',(req,res)=>{
+    res.json(present)
+    console.log(present)
+  })
 app.use('/auth', require("./routes/jwtauth"));
 app.use('/dashboardstudent', require("./routes/dashboardstudent"));
 app.use('/dashboardteacher', require("./routes/dashboardteacher"));
 
-
-// Upload Endpoint
 
 app.use('/dashboardadmin', require("./routes/dashboardadmin"));
 

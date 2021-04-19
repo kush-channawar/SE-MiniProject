@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState,useEffect } from 'react';
 import { toast } from "react-toastify";
 import Message from './Message';
 import Progress from './Progress';
@@ -10,7 +10,21 @@ const UploadAttendance = () => {
   const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState('');
   const [uploadPercentage, setUploadPercentage] = useState(0);
+  const [name,setName] = useState('');
+  const getProfile = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/dashboardteacher/attended", {
+        method: "POST",
+      });
 
+      const parseData = await res.json();
+      setName(parseData);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+ 
   const onChange = e => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
@@ -43,6 +57,9 @@ const UploadAttendance = () => {
       setUploadedFile({ fileName, filePath });
 
       toast.success('File Uploaded')
+
+    getProfile();
+    
     } catch (err) {
       if (err.response.status === 500) {
         setMessage('There was a problem with the server');
@@ -51,6 +68,8 @@ const UploadAttendance = () => {
       }
     }
   };
+
+  
 
   return (
     <Fragment>
@@ -73,7 +92,7 @@ const UploadAttendance = () => {
 
         <input
           type='submit'
-          value='Upload'
+          value='Upload and Validate'
           className='btn btn-primary btn-block mt-4'
         />
       </form>
@@ -81,7 +100,8 @@ const UploadAttendance = () => {
       {uploadedFile ? (
         <div className='row mt-5'>
           <div className='col-md-6 m-auto'>
-            <h3 className='text-center'>{uploadedFile.fileName}</h3>
+            <h3 className='text-center'>Attendance Marked</h3>
+            <p> Present :</p><br></br><p>{" " + name + " \n"}</p>
           </div>
         </div>
       ) : null}
