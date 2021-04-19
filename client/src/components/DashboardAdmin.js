@@ -51,8 +51,12 @@ const Dashboard = ({ setAuth }) => {
       <form action="/dashboardadmin/uploadteacher">
       <button className="btn btn-success"> Upload Teacher csv</button>
       </form>
+      
       <br/>
       <br></br>
+      <form action="/dashboardadmin/uploadtimetable">
+      <button className="btn btn-success">Upload TimeTable</button>
+      </form>
      
     
     </div>

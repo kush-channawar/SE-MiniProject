@@ -37,7 +37,8 @@ CREATE TABLE timetable(
     p4 VARCHAR(255),
     p5 VARCHAR(255),
     p6 VARCHAR(255),
-    p7 VARCHAR(255)
+    p7 VARCHAR(255),
+    p8 VARCHAR(255)
 
 );
 

@@ -7,6 +7,7 @@ let p4Arr=[];
 let p5Arr=[];
 let p6Arr=[];
 let p7Arr=[];
+let p8Arr=[];
 const TimeTable = () => {
   const [days, setDays] = useState([]);
   const [p1,setp1] = useState([]);
@@ -16,7 +17,7 @@ const TimeTable = () => {
   const [p5,setp5] = useState([]);
   const [p7,setp7] = useState([]);
   const [p6,setp6] = useState([]);
-
+  const [p8,setp8] = useState([]);
 
   const getProfile = async () => {
     try {
@@ -34,6 +35,7 @@ const TimeTable = () => {
       p5Arr=parseData.p5;
       p6Arr=parseData.p6;
       p7Arr=parseData.p7;
+      p8Arr=parseData.p8;
 
       setDays(dayArr)
       setp1(p1Arr)
@@ -43,6 +45,7 @@ const TimeTable = () => {
       setp5(p5Arr)
       setp6(p6Arr)
       setp7(p7Arr)
+      setp8(p8Arr)
     } catch (err) {
       console.error(err.message);
     }
@@ -64,16 +67,8 @@ const TimeTable = () => {
       <br/>
       <br></br>
       <table id="myTABLE">
-  <tr>
-    <td>DAY</td>
-    <td>P1</td>
-    <td>P2</td>
-    <td>P3</td>
-    <td>P4</td>
-    <td>P5</td>
-    <td>P6</td>
-    <td>P7</td>
-  </tr>
+      
+  
   <tr>
   <td>{days[0]}</td>
     <td>{p1[0]}</td>
@@ -83,6 +78,7 @@ const TimeTable = () => {
     <td>{p5[0]}</td>
     <td>{p6[0]}</td>
     <td>{p7[0]}</td>
+    <td>{p8[0]}</td>
   </tr>
   <tr>
   <td>{days[1]}</td>
@@ -93,6 +89,7 @@ const TimeTable = () => {
     <td>{p5[1]}</td>
     <td>{p6[1]}</td>
     <td>{p7[1]}</td>
+    <td>{p8[1]}</td>
   </tr>
   <tr>
   <td>{days[2]}</td>
@@ -103,6 +100,7 @@ const TimeTable = () => {
     <td>{p5[2]}</td>
     <td>{p6[2]}</td>
     <td>{p7[2]}</td>
+    <td>{p8[2]}</td>
   </tr>
   <tr>
   <td>{days[3]}</td>
@@ -113,7 +111,9 @@ const TimeTable = () => {
     <td>{p5[3]}</td>
     <td>{p6[3]}</td>
     <td>{p7[3]}</td>
+    <td>{p8[3]}</td>
   </tr>
+  
   <tr>
   <td>{days[4]}</td>
     <td>{p1[4]}</td>
@@ -123,6 +123,18 @@ const TimeTable = () => {
     <td>{p5[4]}</td>
     <td>{p6[4]}</td>
     <td>{p7[4]}</td>
+    <td>{p8[4]}</td>
+  </tr>
+  <tr>
+  <td>{days[5]}</td>
+    <td>{p1[5]}</td>
+    <td>{p2[5]}</td>
+    <td>{p3[5]}</td>
+    <td>{p4[5]}</td>
+    <td>{p5[5]}</td>
+    <td>{p6[5]}</td>
+    <td>{p7[5]}</td>
+    <td>{p8[5]}</td>
   </tr>
   
 </table>

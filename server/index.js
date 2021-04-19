@@ -205,6 +205,7 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
       var p5 = new Array();
       var p6 = new Array();
       var p7 = new Array();
+      var p8 = new Array();
 
       for(let i=0;i<data.rows.length;i++){
         days.push(data.rows[i].day)
@@ -215,15 +216,73 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
         p5.push(data.rows[i].p5)
         p6.push(data.rows[i].p6)
         p7.push(data.rows[i].p7)
+        p8.push(data.rows[i].p8)
 
       }
       console.log(days.toString())
-      res.json({day :days,p1:p1,p2:p2,p3:p3,p4:p4,p5:p5,p6:p6,p7:p7})
+      res.json({day :days,p1:p1,p2:p2,p3:p3,p4:p4,p5:p5,p6:p6,p7:p7,p8:p8})
     }
     catch(err){
         console.log(err);
     }
 })
+
+app.post('/dashboardadmin/uploadtimetable',(req,res)=>{
+  if (req.files === null) {
+    return res.status(400).json({ msg: 'No file uploaded' });
+  }
+
+  const file = req.files.file;
+  let reqPath = path.join(__dirname, '../')
+  file.mv(`${reqPath}/client/public/uploads/student/${file.name}`, err => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+
+    res.json({ fileName: file.name, filePath: `/uploads/student/${file.name}` });
+
+
+
+    let csvStream = csv.parseFile(`${reqPath}/client/public/uploads/student/${file.name}`, { headers: ['a','b','c','d','e','f','g','h','i']})
+  .on("data", function(record){
+      csvStream.pause();
+
+      if(counter < 6)
+      {
+          let day = record.a;
+          let p1 = record.b;
+          let p2 = record.c;
+          let p3 = record.d;
+          let p4 = record.e;
+          let p5 = record.f;
+          let p6 = record.g;
+          let p7 = record.h;
+          let p8 = record.i;
+           pool.query("INSERT INTO timetable(day, p1,p2,p3,p4,p5,p6,p7,p8) VALUES($1, $2, $3, $4,$5,$6,$7,$8,$9)", [day,p1,p2,p3,p4,p5,p6,p7,p8], function(err){
+              if(err)
+              {
+                  console.log(err);
+              }
+          });
+
+          ++counter;
+      }
+      
+      csvStream.resume();
+
+  }).on("end", function(){
+      console.log("Job is done!");
+      console.log(macs)
+  }).on("error", function(err){
+      console.log(err);
+  });
+  });
+
+})
+
+
+
 app.use('/auth', require("./routes/jwtauth"));
 app.use('/dashboardstudent', require("./routes/dashboardstudent"));
 app.use('/dashboardteacher', require("./routes/dashboardteacher"));

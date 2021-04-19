@@ -24,6 +24,8 @@ import DashboardAdmin from "./components/DashboardAdmin";
 import Header from "../src/Header"
 import UploadAttendance from"./components/UploadAttendance";
 import TimeTable from "./components/TimeTable"
+import UploadTimeTable from "./components/UploadTimeTable"
+
 toast.configure();
 
 function App() {
@@ -66,6 +68,17 @@ function App() {
                   <TimeTable {...props} setAuth={setAuth} />
                 ) : (
                   <TimeTable/>
+                )
+              }
+            />
+            <Route
+              exact
+              path="/dashboardadmin/uploadtimetable"
+              render={props =>
+                !isAuthenticated ? (
+                  <UploadTimeTable {...props} setAuth={setAuth} />
+                ) : (
+                  <UploadTimeTable/>
                 )
               }
             />
