@@ -49,7 +49,7 @@ router.post("/loginstudent", validInfo, async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await pool.query("SELECT * FROM student WHERE user_email = $1", [
+    const user = await pool.query("SELECT * FROM student WHERE email = $1", [
       email
     ]);
 
@@ -61,7 +61,7 @@ router.post("/loginstudent", validInfo, async (req, res) => {
     if (!password===user.rows[0].user_password) {
       return res.status(401).json("Invalid Credential2");
     }
-    const jwtToken = jwtGenerator(user.rows[0].user_id);
+    const jwtToken = jwtGenerator(user.rows[0].sid);
     return res.json({ jwtToken });
   } catch (err) {
     console.error(err.message);
@@ -73,7 +73,7 @@ router.post("/loginteacher", validInfo, async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await pool.query("SELECT * FROM teacher WHERE user_email = $1", [
+    const user = await pool.query("SELECT * FROM teacher WHERE email = $1", [
       email
     ]);
 
@@ -84,7 +84,7 @@ router.post("/loginteacher", validInfo, async (req, res) => {
     if (!password===user.rows[0].user_password) {
       return res.status(401).json("Invalid Credential");
     }
-    const jwtToken = jwtGenerator(user.rows[0].user_id);
+    const jwtToken = jwtGenerator(user.rows[0].tid);
     return res.json({ jwtToken });
   } catch (err) {
     console.error(err.message);

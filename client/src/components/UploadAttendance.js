@@ -1,8 +1,9 @@
-import React, { Fragment, useState,useEffect } from 'react';
+import React, { Fragment, useState} from 'react';
 import { toast } from "react-toastify";
 import Message from './Message';
 import Progress from './Progress';
 import axios from 'axios';
+
 
 const UploadAttendance = () => {
   const [file, setFile] = useState('');
@@ -24,11 +25,17 @@ const UploadAttendance = () => {
     }
   };
 
+  
+
  
   const onChange = e => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
+    
   };
+
+
+
 
   const onSubmit = async e => {
     e.preventDefault();
@@ -51,17 +58,18 @@ const UploadAttendance = () => {
           setTimeout(() => setUploadPercentage(0), 10000);
         }
       });
+      getProfile();
 
       const { fileName, filePath } = res.data;
 
-      setUploadedFile({ fileName, filePath });
+      setUploadedFile({ fileName, filePath});
 
       toast.success('File Uploaded')
 
-    getProfile();
     
     } catch (err) {
       if (err.response.status === 500) {
+        
         setMessage('There was a problem with the server');
       } else {
         setMessage(err.response.data.msg);
@@ -69,7 +77,9 @@ const UploadAttendance = () => {
     }
   };
 
-  
+
+   
+
 
   return (
     <Fragment>

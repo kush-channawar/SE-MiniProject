@@ -14,6 +14,7 @@ app.use(express.static('public'));
 var macs = new Array();
 var names=new Array();
 var present=new Array();
+var courseName = ""
 pool.connect(function(err){
   if(err)
   {
@@ -22,7 +23,7 @@ pool.connect(function(err){
 });
 
 let counter = 0; 
-
+//upload student details
 app.post('/dashboardadmin/uploadstudent', (req, res) => {
     if (req.files === null) {
       return res.status(400).json({ msg: 'No file uploaded' });
@@ -48,10 +49,10 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
         {
             let id = record.MIS;
             let name = record.Name;
-            let email = record.Email;
             let password = record.Password;
             let mac = record.MAC;
-            pool.query("INSERT INTO student(user_id, user_name, user_email, user_password,user_mac) VALUES($1, $2, $3, $4,$5)", [id, name, email,password,mac], function(err){
+            let email = record.Email;
+            pool.query("INSERT INTO student(sid, name, password,mac_add,email) VALUES($1, $2, $3, $4,$5)", [id, name,password,mac,email], function(err){
                 if(err)
                 {
                     console.log(err);
@@ -71,7 +72,7 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
     });
     });
   });
-  
+  // upload teacher details
   app.post('/dashboardadmin/uploadteacher',(req, res) => {
     if (req.files === null) {
       return res.status(400).json({ msg: 'No file uploaded' });
@@ -85,18 +86,18 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
         return res.status(500).send(err);
       }
   
-      res.json({ fileName: file.name, filePath: `/uploads/teacher/${file.name}` });
+      res.json({ fileName: file.name, filePath: `/uploads/teacher/${file.name}`});
       let csvStream = csv.parseFile(`${reqPath}/client/public/uploads/teacher/${file.name}`, { headers: true })
     .on("data", function(record){
         csvStream.pause();
 
-        if(counter < 100)
+        if(counter < 15)
         {
-            let id = record.MIS;
+            let id = record.ID;
             let name = record.Name;
             let email = record.Email;
             let password = record.Password;
-            pool.query("INSERT INTO teacher(user_id, user_name, user_email, user_password) VALUES($1, $2, $3, $4)", [id, name, email,password], function(err){
+            pool.query("INSERT INTO teacher(tid, name, email, password) VALUES($1, $2, $3, $4)", [id, name, email,password], function(err){
                 if(err)
                 {
                     console.log(err);
@@ -114,14 +115,14 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
     });
     });
   });
-
+  // get mac ids from attendance csv
   async function fetchmac(){
     try{
-      mac_id = await pool.query("SELECT * FROM student")
-      //console.log(mac_id.rows[0])
+      mac_id = await pool.query("SELECT a.mac_add,a.name FROM student a,course_enroll b ,courses c where a.sid = b.sid and b.cid = c.cid and c.name = $1",[courseName]);
+      //console.log(mac_id.rows[0].mac_add)
       for(let i =0;i<mac_id.rows.length;i++){
-        macs.push((mac_id.rows[i].user_mac).toString());
-        names.push((mac_id.rows[i].user_name).toString());
+        macs.push((mac_id.rows[i].mac_add).toString());
+        names.push((mac_id.rows[i].name).toString());
       }
       console.log(macs,names)
     }
@@ -129,7 +130,22 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
         console.log(err)
       }
   }
-  
+  //confirm course 
+  app.post('/dashboardteacher/confirmcourses',async(req,res)=>{
+
+    const {course} = req.body
+    try {
+      const user = await pool.query("select * from courses where name = $1",[course])
+      console.log(course)
+      courseName = course    
+
+    }
+    catch(err) {
+      console.log(err.message)
+
+    }
+  })
+  //upload student attendance
   app.post('/dashboardteacher/uploadstudent', async (req, res) => {
     try{
      await fetchmac()
@@ -183,16 +199,16 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
     console.error(err.message);
   }
   });
-  
+  // respond with the array of attendees
   app.post('/dashboardteacher/attended',(req,res)=>{
     res.json(present)
     console.log(present)
     present.length=0;
     macs.length=0;
     names.length=0;
-    console.log(present);
   })
 
+  // view timetable csv in table format
   app.post('/timetable',async(req,res)=>{
     try{
       const data = await pool.query("SELECT * FROM\
@@ -236,7 +252,7 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
         console.log(err);
     }
 })
-
+  // upload timetable csv
 app.post('/dashboardadmin/uploadtimetable',(req,res)=>{
   if (req.files === null) {
     return res.status(400).json({ msg: 'No file uploaded' });

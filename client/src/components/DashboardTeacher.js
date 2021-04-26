@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
-
+  const [courses,setCourses] = useState([])
   const getProfile = async () => {
     try {
       const res = await fetch("http://localhost:5000/dashboardteacher/", {
@@ -12,11 +12,25 @@ const Dashboard = ({ setAuth }) => {
       });
 
       const parseData = await res.json();
-      setName(parseData.user_name);
+      setName(parseData.name);
     } catch (err) {
       console.error(err.message);
     }
   };
+
+  const getCourses = async ()=>{
+    try {
+      const res = await fetch("http://localhost:5000/dashboardteacher/courses", {
+        method: "POST",
+        headers: { jwt_token: localStorage.token }
+      });
+
+      const parseData = await res.json();
+      setCourses(parseData);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
 
   const logout = async e => {
     e.preventDefault();
@@ -31,10 +45,13 @@ const Dashboard = ({ setAuth }) => {
 
   useEffect(() => {
     getProfile();
+    getCourses();
   }, []);
 
   return (
     <div>
+      
+      
       <h1 className="mt-5">Dashboard Teacher</h1>
       <h2>Welcome {name}</h2>
       <button onClick={e => logout(e)} className="btn btn-primary">
@@ -42,10 +59,18 @@ const Dashboard = ({ setAuth }) => {
       </button>
       <br/>
       <br></br>
-      <form action="/dashboardteacher/uploadstudent">
-      <button className="btn btn-secondary"> Upload Student csv</button>
+      <h2>Courses you teach : {" " + courses + " \n"} </h2>
+      <br/>
+      <br></br>
+      <form action="/dashboardteacher/confirmcourse">
+      <button className="btn btn-secondary">Upload Student Attendance csv</button>
+      
       </form>
+      <br/>
+      <br></br>
+      
     </div>
+    
   );
 };
 

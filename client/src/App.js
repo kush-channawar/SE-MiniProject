@@ -25,6 +25,8 @@ import Header from "../src/Header"
 import UploadAttendance from"./components/UploadAttendance";
 import TimeTable from "./components/TimeTable"
 import UploadTimeTable from "./components/UploadTimeTable"
+import Confirm from "./components/ConfirmCourse";
+import Faq from "./components/FAQ"
 
 toast.configure();
 
@@ -104,6 +106,7 @@ function App() {
                 )
               }
             />
+            
             <Route
               exact
               path="/loginteacher"
@@ -201,6 +204,28 @@ function App() {
                   <UploadAttendance  setAuth={setAuth} />
                 ) : (
                   <UploadAttendance/>
+                )
+              }
+            />
+            <Route
+              exact
+              path="/dashboardteacher/confirmcourse"
+              render={props =>
+                isAuthenticated ? (
+                  <Confirm  setAuth={setAuth} />
+                ) : (
+                  <Confirm/>
+                )
+              }
+            />
+            <Route
+              exact
+              path="/faq"
+              render={props =>
+                isAuthenticated ? (
+                  <Faq/>
+                ) : (
+                  <Faq/>
                 )
               }
             />
