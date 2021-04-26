@@ -65,6 +65,7 @@ const UploadAttendance = () => {
       setUploadedFile({ fileName, filePath});
 
       toast.success('File Uploaded')
+      toast.warning("To add another attendance go back and validate")
 
     
     } catch (err) {

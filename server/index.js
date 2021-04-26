@@ -12,6 +12,19 @@ app.use(express.json());
 
 app.use(express.static('public'));
 var macs = new Array();
+let date_ob = new Date();
+
+// current date
+// adjust 0 before single digit date
+let date = ("0" + date_ob.getDate()).slice(-2);
+
+// current month
+let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+// current year
+let year = date_ob.getFullYear();
+
+ let d = date + "-" + month + "-" + year
 var sids=new Array();
 var present=new Array();
 var courseName = ""
@@ -119,7 +132,7 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
   // get mac ids from attendance csv
   async function fetchmac(){
     try{
-      mac_id = await pool.query("SELECT a.mac_add,a.sid FROM student a,course_enroll b ,courses c where a.sid = b.sid and b.cid = c.cid and c.name = $1",[courseName]);
+      mac_id = await pool.query("SELECT a.mac_add,a.sid FROM student a,course_enroll b ,courses c where a.sid = b.sid and b.cid = c.cid and c.cid = $1",[courseName]);
       //console.log(mac_id.rows[0].mac_add)
       for(let i =0;i<mac_id.rows.length;i++){
         macs.push((mac_id.rows[i].mac_add).toString());
@@ -137,8 +150,8 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
     const {course} = req.body
     try {
       const user = await pool.query("select * from courses where name = $1",[course])
-      console.log(course)
-      courseName = course    
+      console.log(user.rows[0].cid)
+      courseName = user.rows[0].cid    
 
     }
     catch(err) {
@@ -218,7 +231,20 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
   // respond with the array of attendees
   app.post('/dashboardteacher/attended',(req,res)=>{
     res.json(present)
+    console.log(sids)
     console.log(present)
+    for(let i =0 ;i<sids.length;i++){
+        for (let j=0;j<present.length;j++){
+          if(sids[i]===present[j]){
+              pool.query("insert into student_attend values ($1,$2,$3,1)",[sids[i],courseName,d])
+              break
+          }
+          else{
+            pool.query("insert into student_attend values ($1,$2,$3,0)",[sids[i],courseName,d])
+            break
+          }
+        }
+    }
     present.length=0;
     macs.length=0;
     sids.length=0;
@@ -336,5 +362,6 @@ app.use('/dashboardteacher', require("./routes/dashboardteacher"));
 app.use('/dashboardadmin', require("./routes/dashboardadmin"));
 
 app.listen(5000, () => {
+  console.log(d);
     console.log("server started on port 5000");
 });
