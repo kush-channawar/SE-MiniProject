@@ -12,6 +12,7 @@ return (
         <Nav.Link href="/loginstudent">Student</Nav.Link>
         <Nav.Link href="/loginteacher">Teacher</Nav.Link>
         <Nav.Link href="/loginadministrator">Admin</Nav.Link>
+        <Nav.Link href="/faq">FAQS</Nav.Link>
       </Nav>
     </Navbar.Collapse>
   </Navbar>

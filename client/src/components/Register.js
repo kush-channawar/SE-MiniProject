@@ -51,6 +51,7 @@ const Register = ({ setAuth }) => {
       <input
           type="text"
           name="id"
+          
           value={id}
           placeholder="ID"
           onChange={e => onChange(e)}
@@ -68,6 +69,9 @@ const Register = ({ setAuth }) => {
           type="password"
           name="password"
           value={password}
+          pattern="(?=.*\d)(?=.*[a-z]).{8,}"
+          title="Must contain at least one number and lowercase letter, and at least 8 or more characters"
+          required='true'
           placeholder="password"
           onChange={e => onChange(e)}
           className="form-control my-3"
@@ -75,6 +79,9 @@ const Register = ({ setAuth }) => {
         <input
           type="text"
           name="name"
+          pattern="(?=.*[a-z])(?=.[A-Z])"
+          title="Must contain lowercase letter Or Caps Only"
+
           value={name}
           placeholder="name"
           onChange={e => onChange(e)}

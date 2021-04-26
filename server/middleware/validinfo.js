@@ -4,7 +4,6 @@ module.exports = function(req, res, next) {
     function validEmail(userEmail) {
       return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail);
     }
-  
     if (req.path === "/register") {
       console.log(!email.length);
       if (![id,email, name, password].every(Boolean)) {

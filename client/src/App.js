@@ -27,6 +27,7 @@ import TimeTable from "./components/TimeTable"
 import UploadTimeTable from "./components/UploadTimeTable"
 import Confirm from "./components/ConfirmCourse";
 import Faq from "./components/FAQ"
+import Enrolled from './components/Enrolled'
 
 toast.configure();
 
@@ -226,6 +227,17 @@ function App() {
                   <Faq/>
                 ) : (
                   <Faq/>
+                )
+              }
+            />
+            <Route
+              exact
+              path="/enrolledcourses"
+              render={props =>
+                isAuthenticated ? (
+                  <Enrolled/>
+                ) : (
+                  <Enrolled/>
                 )
               }
             />

@@ -4,7 +4,7 @@ const Faq = () => {
     return(
         <Fragment>
 <div class="container">
-
+<form action = "/"><button className='btn btn-danger btn-block mt-4'> Go Back</button></form>
   <h2>Frequently Asked Questions</h2>
   <br></br>
 

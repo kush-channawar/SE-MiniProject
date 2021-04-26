@@ -45,6 +45,9 @@ const Dashboard = ({ setAuth }) => {
       <form action="/timetable">
       <button className="btn btn-success">View TimeTable</button>
       </form>
+      <form action="/enrolledcourses">
+      <button className="btn btn-success">View Enrolled Courses</button>
+      </form>
     </div>
   );
 };

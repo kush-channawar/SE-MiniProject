@@ -12,9 +12,10 @@ app.use(express.json());
 
 app.use(express.static('public'));
 var macs = new Array();
-var names=new Array();
+var sids=new Array();
 var present=new Array();
 var courseName = ""
+var courseNameStud =""
 pool.connect(function(err){
   if(err)
   {
@@ -118,13 +119,13 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
   // get mac ids from attendance csv
   async function fetchmac(){
     try{
-      mac_id = await pool.query("SELECT a.mac_add,a.name FROM student a,course_enroll b ,courses c where a.sid = b.sid and b.cid = c.cid and c.name = $1",[courseName]);
+      mac_id = await pool.query("SELECT a.mac_add,a.sid FROM student a,course_enroll b ,courses c where a.sid = b.sid and b.cid = c.cid and c.name = $1",[courseName]);
       //console.log(mac_id.rows[0].mac_add)
       for(let i =0;i<mac_id.rows.length;i++){
         macs.push((mac_id.rows[i].mac_add).toString());
-        names.push((mac_id.rows[i].name).toString());
+        sids.push((mac_id.rows[i].sid).toString());
       }
-      console.log(macs,names)
+      console.log(macs,sids)
     }
       catch(err){
         console.log(err)
@@ -138,6 +139,21 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
       const user = await pool.query("select * from courses where name = $1",[course])
       console.log(course)
       courseName = course    
+
+    }
+    catch(err) {
+      console.log(err.message)
+
+    }
+  })
+
+  app.post('/dashboardstudent/confirmcourses',async(req,res)=>{
+
+    const {course} = req.body
+    try {
+      const user = await pool.query("select * from courses where name = $1",[course])
+      console.log(course)
+      courseNameStudent = course    
 
     }
     catch(err) {
@@ -178,8 +194,8 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
           //console.log(devname,mac)
           for(let i=0;i<macs.length;i++){
             if(macs[i]==mac){
-              console.log(names[i], "is present")
-              present.push(names[i])
+              console.log(sids[i], "is present")
+              present.push(sids[i])
             }
           }
           
@@ -205,7 +221,7 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
     console.log(present)
     present.length=0;
     macs.length=0;
-    names.length=0;
+    sids.length=0;
   })
 
   // view timetable csv in table format

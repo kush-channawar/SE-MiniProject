@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import "./tt.css"
 let dayArr =[];
 let p1Arr=[];
 let p2Arr=[];
@@ -59,85 +60,261 @@ const TimeTable = () => {
   return (
     <Fragment>
       
+      
     <div>
-      <h1 classdays="mt-5">Dashboard Student</h1>
-      <h2>Welcome ,Heres the TimeTable</h2>
+      
+      
+      <h2>Welcome, TimeTable for SEM-6</h2>
       <br/>
   
       <br/>
       <br></br>
-      <table id="myTABLE">
-      
-  
-  <tr>
-  <td>{days[0]}</td>
-    <td>{p1[0]}</td>
-    <td>{p2[0]}</td>
-    <td>{p3[0]}</td>
-    <td>{p4[0]}</td>
-    <td>{p5[0]}</td>
-    <td>{p6[0]}</td>
-    <td>{p7[0]}</td>
-    <td>{p8[0]}</td>
-  </tr>
-  <tr>
-  <td>{days[1]}</td>
-    <td>{p1[1]}</td>
-    <td>{p2[1]}</td>
-    <td>{p3[1]}</td>
-    <td>{p4[1]}</td>
-    <td>{p5[1]}</td>
-    <td>{p6[1]}</td>
-    <td>{p7[1]}</td>
-    <td>{p8[1]}</td>
-  </tr>
-  <tr>
-  <td>{days[2]}</td>
-    <td>{p1[2]}</td>
-    <td>{p2[2]}</td>
-    <td>{p3[2]}</td>
-    <td>{p4[2]}</td>
-    <td>{p5[2]}</td>
-    <td>{p6[2]}</td>
-    <td>{p7[2]}</td>
-    <td>{p8[2]}</td>
-  </tr>
-  <tr>
-  <td>{days[3]}</td>
-    <td>{p1[3]}</td>
-    <td>{p2[3]}</td>
-    <td>{p3[3]}</td>
-    <td>{p4[3]}</td>
-    <td>{p5[3]}</td>
-    <td>{p6[3]}</td>
-    <td>{p7[3]}</td>
-    <td>{p8[3]}</td>
-  </tr>
-  
-  <tr>
-  <td>{days[4]}</td>
-    <td>{p1[4]}</td>
-    <td>{p2[4]}</td>
-    <td>{p3[4]}</td>
-    <td>{p4[4]}</td>
-    <td>{p5[4]}</td>
-    <td>{p6[4]}</td>
-    <td>{p7[4]}</td>
-    <td>{p8[4]}</td>
-  </tr>
-  <tr>
-  <td>{days[5]}</td>
-    <td>{p1[5]}</td>
-    <td>{p2[5]}</td>
-    <td>{p3[5]}</td>
-    <td>{p4[5]}</td>
-    <td>{p5[5]}</td>
-    <td>{p6[5]}</td>
-    <td>{p7[5]}</td>
-    <td>{p8[5]}</td>
-  </tr>
-  
-</table>
+      <div class="container">
+                <div class="timetable-img text-center">
+                    <img src="img/content/timetable.png" alt=""/>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr class="bg-light-gray">
+                                <th class="text-uppercase">{days[0]}
+                                </th>
+                                <th class="text-uppercase">{p1[0]}</th>
+                                <th class="text-uppercase">{p2[0]}</th>
+                                <th class="text-uppercase">{p3[0]}</th>
+                                <th class="text-uppercase">{p4[0]}</th>
+                                <th class="text-uppercase">{p5[0]}</th>
+                                <th class="text-uppercase">{p6[0]}</th>
+                                <th class="text-uppercase">{p7[0]}</th>
+                                <th class="text-uppercase">{p8[0]}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="align-middle">{days[1]}</th>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{p1[1]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p2[1]}</span>
+                                     
+                                      
+                                </td>
+
+                                <td>
+                                    <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p3[1]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p4[1]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p5[1]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p6[1]}</span>
+                                     
+                                       
+                                </td>
+                                <td>
+                                    <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p7[1]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p8[1]}</span>
+                                     
+                                      
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="align-middle">{days[2]}</th>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{p1[2]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p2[2]}</span>
+                                     
+                                      
+                                </td>
+
+                                <td>
+                                    <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p3[2]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p4[2]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p5[2]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p6[2]}</span>
+                                     
+                                       
+                                </td>
+                                <td>
+                                    <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p7[2]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p8[2]}</span>
+                                     
+                                      
+                                </td>
+                            </tr>
+							<tr>
+                                <th class="align-middle">{days[3]}</th>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{p1[3]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p2[3]}</span>
+                                     
+                                      
+                                </td>
+
+                                <td>
+                                    <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p3[3]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p4[3]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p5[3]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p6[3]}</span>
+                                     
+                                       
+                                </td>
+                                <td>
+                                    <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p7[3]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p8[3]}</span>
+                                     
+                                      
+                                </td>
+                            </tr>
+							<tr>
+                                <th class="align-middle">{days[4]}</th>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{p1[4]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p2[4]}</span>
+                                     
+                                      
+                                </td>
+
+                                <td>
+                                    <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p3[4]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p4[4]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p5[4]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p6[4]}</span>
+                                     
+                                       
+                                </td>
+                                <td>
+                                    <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p7[4]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p8[4]}</span>
+                                     
+                                      
+                                </td>
+                            </tr>
+							<tr>
+                                <th class="align-middle">{days[5]}</th>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{p1[5]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p2[5]}</span>
+                                     
+                                      
+                                </td>
+
+                                <td>
+                                    <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p3[5]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p4[5]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p5[5]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p6[5]}</span>
+                                     
+                                       
+                                </td>
+                                <td>
+                                    <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p7[5]}</span>
+                                     
+                                      
+                                </td>
+                                <td>
+                                    <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{p8[5]}</span>
+                                     
+                                      
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
      
 <form action = "/dashboardstudent"><button className='btn btn-danger btn-block mt-4'> Go Back</button></form>
     </div>
