@@ -58,7 +58,7 @@ router.post("/loginstudent", validInfo, async (req, res) => {
     }
 
     
-    if (!password===user.rows[0].user_password) {
+    if (!(password===user.rows[0].password)) {
       return res.status(401).json("Invalid Credential2");
     }
     const jwtToken = jwtGenerator(user.rows[0].sid);
@@ -81,7 +81,7 @@ router.post("/loginteacher", validInfo, async (req, res) => {
       return res.status(401).json("Invalid Credential");
     }
 
-    if (!password===user.rows[0].user_password) {
+    if (!(password===user.rows[0].password)) {
       return res.status(401).json("Invalid Credential");
     }
     const jwtToken = jwtGenerator(user.rows[0].tid);
@@ -110,6 +110,7 @@ router.post("/loginadministrator", validInfo, async (req, res) => {
     );
 
     if (!validPassword) {
+      console.log(password,user.rows[0].user_password)
       return res.status(401).json("Invalid Credential");
     }
     const jwtToken = jwtGenerator(user.rows[0].user_id);

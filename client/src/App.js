@@ -90,7 +90,7 @@ function App() {
               path="/"
               render={props =>
                 !isAuthenticated ? (
-                  <Header {...props} setAuth={setAuth} />
+                  <Header {...props} />
                 ) : (
                   <Header/>
                 )
