@@ -32,6 +32,8 @@ const Dashboard = ({ setAuth }) => {
     }
   }
 
+  
+
   const logout = async e => {
     e.preventDefault();
     try {
@@ -68,6 +70,7 @@ const Dashboard = ({ setAuth }) => {
       </form>
       <br/>
       <br></br>
+      
       
     </div>
     

@@ -6,9 +6,11 @@ const cors = require("cors");
 const path = require('path')
 const pool = require('./db');
 const fileUpload = require('express-fileupload');
+const { toNamespacedPath } = require('path');
 app.use(fileUpload());
 app.use(cors());
 app.use(express.json());
+
 
 app.use(express.static('public'));
 var macs = new Array();
@@ -28,7 +30,6 @@ let year = date_ob.getFullYear();
 var sids=new Array();
 var present=new Array();
 var courseName = ""
-var courseNameStud =""
 pool.connect(function(err){
   if(err)
   {
@@ -160,20 +161,7 @@ app.post('/dashboardadmin/uploadstudent', (req, res) => {
     }
   })
 
-  app.post('/dashboardstudent/confirmcourses',async(req,res)=>{
-
-    const {course} = req.body
-    try {
-      const user = await pool.query("select * from courses where name = $1",[course])
-      console.log(course)
-      courseNameStudent = course    
-
-    }
-    catch(err) {
-      console.log(err.message)
-
-    }
-  })
+  
   //upload student attendance
   app.post('/dashboardteacher/uploadstudent', async (req, res) => {
     try{
@@ -352,6 +340,23 @@ app.post('/dashboardadmin/uploadtimetable',(req,res)=>{
 
 })
 
+app.post('/dashboardteacher/generatereport',async (req,res)=> {
+  let reqPath = path.join(__dirname, '../')
+
+  const students = await pool.query("Select sid as MIS,sum(present) as ATTENDANCE from student_attend where cid= $1 group by (sid)",[courseName])
+  const jsonData = JSON.parse(JSON.stringify(students.rows));
+  if(jsonData.length>0){
+    const ws = fs.createWriteStream(`${reqPath}/client/public/uploads/teacher/report-${courseName}-${d}.csv`);
+  csv
+      .write(jsonData, { headers: true })
+      .on("finish", function() {
+      })
+      .pipe(ws);
+    }else{
+      console.log("no file generated")
+    }
+})
+
 
 
 app.use('/auth', require("./routes/jwtauth"));
@@ -362,6 +367,6 @@ app.use('/dashboardteacher', require("./routes/dashboardteacher"));
 app.use('/dashboardadmin', require("./routes/dashboardadmin"));
 
 app.listen(5000, () => {
-  console.log(d);
+
     console.log("server started on port 5000");
 });

@@ -4,6 +4,7 @@ const pool = require("../db");
 
 let cour =[]
 
+
 router.post("/courses", authorize, async (req, res) => {
   try {
   

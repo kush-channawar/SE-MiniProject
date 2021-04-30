@@ -28,7 +28,8 @@ import UploadTimeTable from "./components/UploadTimeTable"
 import Confirm from "./components/ConfirmCourse";
 import Faq from "./components/FAQ"
 import Enrolled from './components/Enrolled'
-
+import CheckAtt from "./components/CheckAtt"
+import SendReminder from "./components/SendReminder";
 toast.configure();
 
 function App() {
@@ -63,6 +64,28 @@ function App() {
         <div className="container">
           
           <Switch>
+          <Route
+              exact
+              path="/dashboardstudent/checkatt"
+              render={props =>
+                !isAuthenticated ? (
+                  <CheckAtt {...props} />
+                ) : (
+                  <CheckAtt/>
+                )
+              }
+            />
+             <Route
+              exact
+              path="/dashboardstudent/sendemailoptions"
+              render={props =>
+                !isAuthenticated ? (
+                  <SendReminder {...props} />
+                ) : (
+                  <SendReminder/>
+                )
+              }
+            />
           <Route
               exact
               path="/timetable"

@@ -111,6 +111,10 @@ const Enrolled = ({ setAuth }) => {
       </form>
       <br/>
       <br></br>
+      <form action = "/dashboardstudent/checkatt">
+        <button class="btn btn-success btn-block"> Check Attendance For The Course!</button>
+      </form>
+      <form action = "/dashboardstudent"><button className='btn btn-danger btn-block mt-4'> Go Back</button></form>
     </Fragment>
   );
 };

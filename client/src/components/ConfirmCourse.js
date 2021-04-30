@@ -33,7 +33,7 @@ const Confirm = ({ setAuth }) => {
   }
 
   const onChange = e =>
-    setInputs({ ...inputs, [e.target.name]: e.target.value });
+    setInputs({ ...inputs, [e.target.name]: e.target.value })
 
   const onSubmitForm = async e => {
     e.preventDefault();
@@ -62,9 +62,37 @@ const Confirm = ({ setAuth }) => {
     getCourses();
   }, []);
 
+
+  const onSubmitFormReport = async e => {
+    e.preventDefault();
+    try {
+
+        toast.success("Generated! Check the Teachers Folder!")
+      const response = await fetch(
+        "http://localhost:5000/dashboardteacher/generatereport",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json"
+          },
+        
+        }
+
+       
+      );
+      console.log("sent")
+
+
+      
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+
   return (
     <Fragment>
-      <h1 className="mt-5 text-center">Login Teacher</h1>
+      <h1 className="mt-5 text-center">Confirm Course</h1>
       <form onSubmit={onSubmitForm}>
       
           <select name = "course" id="course" onChange ={e=> onChange(e)}>
@@ -80,8 +108,11 @@ const Confirm = ({ setAuth }) => {
       <br></br>
       <form action="/dashboardteacher/uploadstudent">
       <button className="btn btn-secondary">Upload Student Attendance csv</button>
+
       
       </form>
+      <form  onSubmit={onSubmitFormReport}><button className='btn btn-danger btn-block mt-4'> Generate Report </button></form>
+
     </Fragment>
   );
 };

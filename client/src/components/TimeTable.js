@@ -317,6 +317,7 @@ const TimeTable = () => {
             </div>
      
 <form action = "/dashboardstudent"><button className='btn btn-danger btn-block mt-4'> Go Back</button></form>
+<form action = "/dashboardstudent/sendemailoptions"><button className='btn btn-danger btn-block mt-4'> set reminder</button></form>
     </div>
     </Fragment>
   );
